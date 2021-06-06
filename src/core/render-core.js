@@ -54,7 +54,7 @@ async function render(_opts = {}) {
     },
     output: 'pdf',
     pdf: {
-      format: 'A4',
+      format: 'Letter',
       printBackground: true,
     },
     screenshot: {
