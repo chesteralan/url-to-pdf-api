@@ -4,7 +4,7 @@ const express = require('express');
 const render = require('./http/render-http');
 const config = require('./config');
 const logger = require('./util/logger')(__filename);
-const { renderQuerySchema, renderBodySchema, sharedQuerySchema } = require('./util/validation');
+const { downloadQuerySchema, renderQuerySchema, renderBodySchema, sharedQuerySchema } = require('./util/validation');
 
 function createRouter() {
   const router = express.Router();
@@ -25,6 +25,15 @@ function createRouter() {
   } else {
     logger.warn('Warning: no authentication required to use the API');
   }
+
+  const getDownloadSchema = {
+    query: downloadQuerySchema,
+    options: {
+      allowUnknownBody: false,
+      allowUnknownQuery: false,
+    },
+  };
+  router.get('/download', validate(getDownloadSchema), render.getDownload);
 
   const getRenderSchema = {
     query: renderQuerySchema,

@@ -21,6 +21,21 @@ function getMimeType(opts) {
   }
 }
 
+const getDownload = ex.createRoute((req, res) => {
+  const opts = getOptsFromQuery(req.query);
+  assertToken(opts);
+  const downloadLink = 'https://staginghdqtrs.wpengine.com/wp-admin/admin-ajax.php?action=call_fjtl_html_token&token='.concat(opts.token);
+  opts.url = downloadLink;
+  return renderCore.render(opts)
+    .then((data) => {
+      if (opts.attachmentName) {
+        res.attachment(opts.attachmentName);
+      }
+      res.set('content-type', getMimeType(opts));
+      res.send(data);
+    });
+});
+
 const getRender = ex.createRoute((req, res) => {
   const opts = getOptsFromQuery(req.query);
 
@@ -123,6 +138,12 @@ function isUrlAllowed(inputUrl) {
   return isAllowed;
 }
 
+function assertToken(opts) {
+  if (!_.isString(opts.token)) {
+    ex.throwStatus(403, 'Token not found!');
+  }
+}
+
 function assertOptionsAllowed(opts) {
   const isDisallowedHtmlInput = !_.isString(opts.url) && config.DISABLE_HTML_INPUT;
   if (isDisallowedHtmlInput) {
@@ -137,6 +158,7 @@ function assertOptionsAllowed(opts) {
 function getOptsFromQuery(query) {
   const opts = {
     url: query.url,
+    token: query.token,
     attachmentName: query.attachmentName,
     scrollPage: query.scrollPage,
     emulateScreenMedia: query.emulateScreenMedia,
@@ -193,6 +215,7 @@ function getOptsFromQuery(query) {
 }
 
 module.exports = {
+  getDownload,
   getRender,
   postRender,
 };

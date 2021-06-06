@@ -65,6 +65,10 @@ const sharedQuerySchema = Joi.object({
   'screenshot.omitBackground': Joi.boolean(),
 });
 
+const downloadQuerySchema = Joi.object({
+  token: Joi.string().required(),
+}).concat(sharedQuerySchema);
+
 const renderQuerySchema = Joi.object({
   url: urlSchema.required(),
 }).concat(sharedQuerySchema);
@@ -135,6 +139,7 @@ const renderBodySchema = Joi.alternatives([
 ]);
 
 module.exports = {
+  downloadQuerySchema,
   renderQuerySchema,
   renderBodySchema,
   sharedQuerySchema,
