@@ -24,8 +24,8 @@ function getMimeType(opts) {
 const getDownload = ex.createRoute((req, res) => {
   const opts = getOptsFromQuery(req.query);
   assertToken(opts);
-  const downloadLink = 'https://staginghdqtrs.wpengine.com/wp-admin/admin-ajax.php?action=call_fjtl_html_token&token='.concat(opts.token);
-  opts.url = downloadLink;
+  const downloadLink = '/wp-admin/admin-ajax.php?action=call_fjtl_html_token&token='.concat(opts.token);
+  opts.url = config.SITE_URL.concat(downloadLink);
   return renderCore.render(opts)
     .then((data) => {
       if (opts.attachmentName) {

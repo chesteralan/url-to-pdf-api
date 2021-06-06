@@ -13,6 +13,7 @@ const config = {
   BROWSER_EXECUTABLE_PATH: process.env.BROWSER_EXECUTABLE_PATH,
   API_TOKENS: [],
   ALLOW_URLS: [],
+  SITE_URL: process.env.SITE_URL,
 };
 
 if (process.env.API_TOKENS) {

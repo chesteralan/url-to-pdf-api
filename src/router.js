@@ -40,28 +40,9 @@ function createRouter() {
   };
   router.get('/download', validate(getDownloadSchema), render.getDownload);
 
-  // const getRenderSchema = {
-  //   query: renderQuerySchema,
-  //   options: {
-  //     allowUnknownBody: false,
-  //     allowUnknownQuery: false,
-  //   },
-  // };
-  // router.get('/api/render', validate(getRenderSchema), render.getRender);
-
-  // const postRenderSchema = {
-  //   body: renderBodySchema,
-  //   query: sharedQuerySchema,
-  //   options: {
-  //     allowUnknownBody: false,
-  //     allowUnknownQuery: false,
-
-  //     // Without this option, text body causes an error
-  //     // https://github.com/AndrewKeig/express-validation/issues/36
-  //     contextRequest: true,
-  //   },
-  // };
-  // router.post('/api/render', validate(postRenderSchema), render.postRender);
+  router.get('/', (req, res) => {
+    res.redirect(config.SITE_URL);
+  });
 
   return router;
 }
