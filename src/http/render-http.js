@@ -28,10 +28,8 @@ const getDownload = ex.createRoute((req, res) => {
   opts.url = config.SITE_URL.concat(downloadLink);
   return renderCore.render(opts)
     .then((data) => {
-      if (opts.attachmentName) {
-        res.attachment(opts.attachmentName);
-      }
-      res.set('content-type', getMimeType(opts));
+      res.attachment('Legacy_Journal.pdf');
+      res.set('Content-Type', getMimeType(opts));
       res.send(data);
     });
 });
