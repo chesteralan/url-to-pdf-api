@@ -230,7 +230,7 @@ async function scrollPage(page) {
         setTimeout(scrollDown, scrollInterval);
       }
 
-      setTimeout(reject, 30000);
+      setTimeout(reject, config.TIMEOUT);
       scrollDown();
     });
   });

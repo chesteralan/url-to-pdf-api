@@ -14,6 +14,7 @@ const config = {
   API_TOKENS: [],
   ALLOW_URLS: [],
   SITE_URL: process.env.SITE_URL,
+  TIMEOUT: process.env.TIMEOUT || 0,
 };
 
 if (process.env.API_TOKENS) {
