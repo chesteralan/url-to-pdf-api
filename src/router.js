@@ -38,7 +38,7 @@ function createRouter() {
       allowUnknownQuery: false,
     },
   };
-  router.get('/download', validate(getDownloadSchema), render.getDownload);
+  router.get('/download', validate(getDownloadSchema), render.getDownload2);
 
   router.get('/', (req, res) => {
     res.redirect(config.SITE_URL);

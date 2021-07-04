@@ -5,6 +5,7 @@ const ex = require('../util/express');
 const renderCore = require('../core/render-core');
 const logger = require('../util/logger')(__filename);
 const config = require('../config');
+const fetch = require('node-fetch');
 
 function getMimeType(opts) {
   if (opts.output === 'pdf') {
@@ -32,6 +33,20 @@ const getDownload = ex.createRoute((req, res) => {
       res.set('Content-Type', getMimeType(opts));
       res.send(data);
     });
+});
+
+const getDownload2 = ex.createRoute((req, res) => {
+  const opts = getOptsFromQuery(req.query);
+  assertToken(opts);
+  const downloadLink = '/wp-admin/admin-ajax.php?action=call_fjtl_html_token&token='.concat(opts.token);
+  opts.url = config.SITE_URL.concat(downloadLink);
+
+  const apiUrl = `https://webtopdf.expeditedaddons.com/?api_key=${config.WEBTOPDF_API_KEY}&content=${opts.url}&html_width=1024&margin=0&title=Legacy+Journal`;
+  fetch(apiUrl).then((response) => {
+    res.attachment('Legacy_Journal.pdf');
+    res.set('Content-Type', getMimeType(opts));
+    res.send(response);
+  });
 });
 
 const getRender = ex.createRoute((req, res) => {
@@ -214,6 +229,7 @@ function getOptsFromQuery(query) {
 
 module.exports = {
   getDownload,
+  getDownload2,
   getRender,
   postRender,
 };

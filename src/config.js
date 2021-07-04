@@ -15,6 +15,7 @@ const config = {
   ALLOW_URLS: [],
   SITE_URL: process.env.SITE_URL,
   TIMEOUT: process.env.TIMEOUT || 0,
+  WEBTOPDF_API_KEY: process.env.WEBTOPDF_API_KEY,
 };
 
 if (process.env.API_TOKENS) {
