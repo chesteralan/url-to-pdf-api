@@ -50,6 +50,7 @@ async function render(_opts = {}) {
       height: 1200,
     },
     goto: {
+      timeout: 0,
       waitUntil: 'networkidle0',
     },
     output: 'pdf',
