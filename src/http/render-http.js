@@ -43,8 +43,10 @@ const getDownload2 = ex.createRoute((req, res) => {
 
   const apiUrl = `https://webtopdf.expeditedaddons.com/?api_key=${config.WEBTOPDF_API_KEY}&content=${opts.url}&html_width=1024&margin=0&title=Legacy+Journal`;
   fetch(apiUrl).then((response) => {
+    console.log('Status:', response.statusCode);
+    console.log('Headers:', JSON.stringify(response.headers));
+    console.log('Response:', response);
     res.attachment('Legacy_Journal.pdf');
-    res.set('Content-Type', getMimeType(opts));
     res.send(response);
   });
 });
