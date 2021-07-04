@@ -38,7 +38,8 @@ function createApp() {
 
   const corsOpts = {
     origin: config.CORS_ORIGIN,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD', 'PATCH'],
+    // methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD', 'PATCH'],
+    methods: ['GET'],
   };
   logger.info('Using CORS options:', corsOpts);
   app.use(cors(corsOpts));

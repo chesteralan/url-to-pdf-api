@@ -41,7 +41,8 @@ const getDownload2 = ex.createRoute((req, res) => {
   const downloadLink = '/wp-admin/admin-ajax.php?action=call_fjtl_html_token&token='.concat(opts.token);
   opts.url = config.SITE_URL.concat(downloadLink);
 
-  const apiUrl = `https://webtopdf.expeditedaddons.com/?api_key=${config.WEBTOPDF_API_KEY}&content=${opts.url}&html_width=1024&margin=0&title=Legacy+Journal`;
+  const htmlURL = encodeURIComponent(opts.url);
+  const apiUrl = `https://webtopdf.expeditedaddons.com/?api_key=${config.WEBTOPDF_API_KEY}&content=${htmlURL}&html_width=1024&margin=0&title=Legacy+Journal`;
   fetch(apiUrl).then((response) => {
     console.log('Status:', response.statusCode);
     console.log('Headers:', JSON.stringify(response.headers));

@@ -42,12 +42,12 @@ async function render(_opts = {}) {
   const opts = _.merge({
     cookies: [],
     scrollPage: false,
-    emulateScreenMedia: true,
-    ignoreHttpsErrors: false,
+    emulateScreenMedia: false,
+    ignoreHttpsErrors: true,
     html: null,
     viewport: {
-      width: 1600,
-      height: 1200,
+      width: 0,
+      height: 0,
     },
     goto: {
       timeout: 0,
